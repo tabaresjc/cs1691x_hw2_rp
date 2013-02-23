@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 \#*\#
 *~
 TAGS
@@ -9,3 +10,23 @@ tmp/
 # bundler state
 /.bundle
 /vendor/bundle/
+=======
+*.gem
+*.rbc
+.bundle
+.config
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
+>>>>>>> 4b147301994656399f4e0cfbaaee9ad30c22b5bf
