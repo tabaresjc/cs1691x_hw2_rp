@@ -10,6 +10,7 @@ class MoviesController < ApplicationController
 	@title_header = ""
 	@release_date_header = ""
 	@sort_by = ""
+
 	if(params[:sort]==nil)
 		@movies = Movie.all
 	else
