@@ -8,4 +8,7 @@
 //= require jquery_ujs
 //= require_tree .
 
+table#movies th.hilite {
+	background-color: yellow;
+}
 

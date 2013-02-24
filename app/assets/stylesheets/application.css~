@@ -60,7 +60,7 @@ form label {
   color: maroon;
 }
 table#movies th.header {
-	background-color: #00BFFF;
+	background-color: #DC143C;
 }
 table#movies th.hilite {
 	background-color: #DAA520;
