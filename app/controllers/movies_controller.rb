@@ -45,9 +45,6 @@ class MoviesController < ApplicationController
 	else
 		@movies = Movie.order(@sort_by).find_all_by_rating(@rating_list.keys)
 	end
-
-
-	
   end
 
 
