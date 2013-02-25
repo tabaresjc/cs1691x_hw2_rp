@@ -39,9 +39,8 @@ class MoviesController < ApplicationController
 	else
 		@movies = Movie.order(@sort_by).find_all_by_rating(@rating_list.keys)
 	end
-	if params[:ratings]!=nil 
-		@rating_list = params[:ratings].delete_if {|k,x| !x };
-	end
+
+
 	#redirect_to movies_path(:sort => @sort_by, :ratings => @all_ratings)
   end
 
