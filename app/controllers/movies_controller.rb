@@ -7,17 +7,16 @@ class MoviesController < ApplicationController
   end
 
   def index
+	#session.delete(:sort)
+	#session.delete(:ratings)
 	@all_ratings = Movie.ratings
-
 	@title_header = ""
 	@release_date_header = ""
 
-	@sort_by = "";
-	@rating_list = []
+	@sort_by = params[:sort] || session[:sort]
+	@rating_list = params[:ratings] || session[:ratings] || {}
 
-	if(params[:ratings]!=nil)
-		@rating_list = params[:ratings]		
-	else
+	if(@rating_list.empty?)
 		@rating_list = @all_ratings
 	end
 	@rating_list.each {|k,v| @all_ratings[k] = true }
@@ -34,6 +33,13 @@ class MoviesController < ApplicationController
 		end
 	end
 
+	if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
+		session[:sort] = @sort_by
+		session[:ratings] = @rating_list
+		flash.keep
+		redirect_to :sort => @sort_by, :ratings => @rating_list
+	end
+
 	if(@sort_by.empty?)
 		@movies = Movie.find_all_by_rating(@rating_list.keys)
 	else
@@ -41,7 +47,7 @@ class MoviesController < ApplicationController
 	end
 
 
-	#redirect_to movies_path(:sort => @sort_by, :ratings => @all_ratings)
+	
   end
 
 
