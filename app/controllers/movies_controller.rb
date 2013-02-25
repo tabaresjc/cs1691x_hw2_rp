@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
 	@title_header = ""
 	@release_date_header = ""
 
-	@sort_by = params[:sort] || session[:sort]
+	@sort_by = params[:sort] || session[:sort] || ""
 	@rating_list = params[:ratings] || session[:ratings] || {}
 
 	if(@rating_list.empty?)
