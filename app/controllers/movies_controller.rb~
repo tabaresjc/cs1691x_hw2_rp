@@ -7,22 +7,42 @@ class MoviesController < ApplicationController
   end
 
   def index
+	@all_ratings = Movie.ratings
+
 	@title_header = ""
 	@release_date_header = ""
-	@sort_by = params[:sort].to_s;
 
-	if(!@sort_by.empty? and (@sort_by=="title" or @sort_by=="release_date"))
+	@sort_by = "";
+	@rating_list = []
+
+	if(params[:ratings]!=nil)
+		@rating_list = params[:ratings]		
+	else
+		@rating_list = @all_ratings
+	end
+	@rating_list.each {|k,v| @all_ratings[k] = true }
+
+	if(params[:sort]!=nil)
+		@sort_by = params[:sort].to_s;
+
 		if @sort_by == "title"			
 			@title_header = "hilite"
-		else
+		elsif @sort_by=="release_date"
 			@release_date_header = "hilite"
+		else
+			@sort_by = ""
 		end
-		@movies = Movie.order(@sort_by).all		
-	else
-		@movies = Movie.all
-
 	end
-	
+
+	if(@sort_by.empty?)
+		@movies = Movie.find_all_by_rating(@rating_list.keys)
+	else
+		@movies = Movie.order(@sort_by).find_all_by_rating(@rating_list.keys)
+	end
+	if params[:ratings]!=nil 
+		@rating_list = params[:ratings].delete_if {|k,x| !x };
+	end
+	#redirect_to movies_path(:sort => @sort_by, :ratings => @all_ratings)
   end
 
 
